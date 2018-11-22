@@ -17,9 +17,12 @@
 package org.hawaiiframework.boot.autoconfigure.rest;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.hawaiiframework.converter.ModelConverter;
+import org.hawaiiframework.validation.ValidationError;
 import org.hawaiiframework.web.exception.DefaultExceptionResponseFactory;
 import org.hawaiiframework.web.exception.ExceptionResponseFactory;
 import org.hawaiiframework.web.exception.HawaiiResponseEntityExceptionHandler;
+import org.hawaiiframework.web.resource.ValidationErrorResource;
 import org.hawaiiframework.web.resource.ValidationErrorResourceAssembler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
@@ -38,7 +41,7 @@ public class HawaiiRestAutoConfiguration {
     private ObjectMapper objectMapper;
 
     @Bean
-    public ValidationErrorResourceAssembler validationErrorResourceAssembler() {
+    public ModelConverter<ValidationError, ValidationErrorResource> validationErrorResourceAssembler() {
         return new ValidationErrorResourceAssembler(objectMapper);
     }
 
